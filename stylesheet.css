@@ -63,6 +63,8 @@ body{
   flex-wrap: wrap;
   overflow: scroll;
   scroll-snap-type: x mandatory;
+  height: 100%;
+  -webkit-overflow-scrolling: touch;
 }
 @media screen and (max-width: 1000px) {
   #content{
