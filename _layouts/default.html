@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8"></meta>
+    <title>{{ site. title }}</title>
+    <script src='xml2json.js'></script>
+    <link rel='stylesheet' type='text/css' href='/stylesheet.css'></link>
+    <script>
+      var sources = {{ page.sources }}
+    </script>
+  </head>
+  <body>
+    <div id='title'>
+      <h1>{{ site.title }}</h1>
+    </div>
+    <div id='date'>
+    </div>
+    <div id='menu'>
+      <a>Headlines</a>
+      <a>Politics</a>
+      <a>Science</a>
+      <a>Technology</a>
+      <a>Business</a>
+      <a>Oklahoma</a>
+      <a>Popular</a>
+    </div>
+    <div id=content>
+    </div>
+  </body>
+  <script src='/script.js'></script>
+</html>
