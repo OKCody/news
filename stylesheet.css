@@ -54,6 +54,8 @@ body{
   width: 7em;
   float: left;
   text-align: center;
+  text-decoration: none;
+  color: black;
 }
 #content{
   display: grid;
