@@ -65,10 +65,12 @@ body{
   scroll-snap-type: x mandatory;
   height: 100%;
   -webkit-overflow-scrolling: touch;
+  scroll-snap-points-x: repeat(100%);
 }
 @media screen and (max-width: 1000px) {
   #content{
     grid-template-columns: repeat(1000, 50%);
+
   }
 }
 @media screen and (max-width: 750px) {
