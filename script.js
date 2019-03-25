@@ -33,6 +33,11 @@ function addImage(item, article){
   var regex = /(https?:\/\/((?!\").)*\"{0}\.(?:png|jpg|gif))/ig;
   var src = JSON.stringify(item).match(regex);
   console.log(src);
+  if(item['link'].includes('spectrum.ieee.org')){
+    console.log(item['media:content']['$'].url);
+    src = [];
+    src[0] = 'https://spectrum.ieee.org' + item['media:content']['$'].url;
+  }
   if(src != null){
     src = src[0];
     // By defaulft, NYTimes images are very small and square.
