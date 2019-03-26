@@ -24,6 +24,9 @@ body{
 #title h1{
   margin: 0px;
 }
+#hmbgr{
+  display: none;
+}
 #date{
   display: block;
   height: 2em;
@@ -63,14 +66,44 @@ body{
   flex-wrap: wrap;
   overflow: scroll;
   scroll-snap-type: x mandatory;
-  height: 100%;
+
   -webkit-overflow-scrolling: touch;
   scroll-snap-points-x: repeat(100%);
+  margin-bottom: 4em;
 }
 @media screen and (max-width: 1000px) {
+  #title{
+    height: 1em;
+    display: block;
+    width: 50%;
+    float: left;
+  }
+  #title h1{
+    line-height: 1em;
+    font-size: .75em;
+  }
+  #hmbgr{
+    display:block;
+    height: 1em;
+    font-size: 1em;
+    width: 50%;
+    float: right;
+    text-align: center;
+    letter-spacing: -3px;
+    color: black;
+  }
+  #date{
+    display: none;
+  }
+  #menu a{
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid lightgray;
+    line-height: 2em;
+    font-size: 1.5em;
+  }
   #content{
     grid-template-columns: repeat(1000, 50%);
-
   }
 }
 @media screen and (max-width: 750px) {
