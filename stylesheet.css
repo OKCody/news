@@ -50,6 +50,7 @@ body{
   margin-bottom: 10px;
   padding-left: auto;
   padding-right: auto;
+  transition: all 2s ease-in-out;
 }
 #menu a{
   display: block;
@@ -62,11 +63,11 @@ body{
 }
 #content{
   display: grid;
+  width: 100%;
   grid-template-columns: repeat(1000, 25%);
   flex-wrap: wrap;
   overflow: scroll;
   scroll-snap-type: x mandatory;
-
   -webkit-overflow-scrolling: touch;
   scroll-snap-points-x: repeat(100%);
   margin-bottom: 4em;
@@ -89,10 +90,18 @@ body{
     width: 50%;
     float: right;
     text-align: center;
-    letter-spacing: -3px;
+    letter-spacing: -.142em;
+    user-select: none;
     color: black;
   }
+  #hmbgr:hover{
+    cursor: pointer;
+    color: lightgray;
+  }
   #date{
+    display: none;
+  }
+  #menu{
     display: none;
   }
   #menu a{
