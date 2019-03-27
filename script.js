@@ -14,7 +14,8 @@ parser = new RSSParser({
     ]
   }
 });
-/*
+
+/*  // Example source format expected by main function
 sources = [
   ['NY Times','http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml'],
   ['NPR','https://www.npr.org/rss/rss.php?id=1019'],
@@ -26,6 +27,11 @@ sources = [
   ['BBC','http://feeds.bbci.co.uk/news/rss.xml']
 ];
 */
+
+// Function for extracting image information from parsed feed json. All sources
+// seem to include image information differently.  This function aims to handle
+// all cases with a single operation, but still some sources require their own
+// special handlers.
 function addImage(item, article){
   // Necessary to reduce object to string, then perform a search for an image
   // URL because all sources seem to include images differently. This is a
@@ -51,6 +57,7 @@ function addImage(item, article){
   }
 }
 
+// Main function: for parsing feeds and populating #content with thier contents
 var content = document.getElementById('content');
 for(j=0; j<sources.length; j++){
   function addArticles(){
@@ -91,6 +98,7 @@ for(j=0; j<sources.length; j++){
   content.appendChild(addArticles());
 }
 
+// Sets date at top of page
 function setDate(){
   var d = new Date();
   var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -100,3 +108,27 @@ function setDate(){
   dateNode.appendChild(date);
 }
 setDate();
+
+// Display: block; / Display: none; toggle
+function toggle(id){
+  var elem = document.querySelector(id);
+  var state = window.getComputedStyle(elem).display;
+  if(state != 'none'){
+  	elem.style.display = 'none';
+  }
+  else{
+  	elem.style.display = 'block';
+  }
+};
+
+window.addEventListener('resize', function(){
+  // Display menu appropriately when screen width changes no matter current
+  // menu display state.
+  var menu = document.getElementById('menu');
+  if(window.innerWidth > 1000 && menu.style.display != 'block'){
+    menu.style.display = 'block';
+  }
+  if(window.innerWidth <= 1000 && menu.style.display == 'block'){
+    menu.style.display = 'none';
+  }
+});
