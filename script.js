@@ -38,9 +38,9 @@ function addImage(item, article){
   // compromise between createing special code for each source and
   var regex = /(https?:\/\/((?!\").)*\"{0}\.(?:png|jpg|gif))/ig;
   var src = JSON.stringify(item).match(regex);
-  console.log(src);
+  //console.log(src);
   if(item['link'].includes('spectrum.ieee.org')){
-    console.log(item['media:content']['$'].url);
+    //console.log(item['media:content']['$'].url);
     src = [];
     src[0] = 'https://spectrum.ieee.org' + item['media:content']['$'].url;
   }
