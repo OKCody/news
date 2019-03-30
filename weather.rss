@@ -12,58 +12,58 @@
   </item>
   <item>
     <title>Air Temperature</title>
-    <link>http://www.mesonet.org/data/public/mesonet/maps/realtime/current.TAIR.grad.png</link>
-    <media:content url="http://www.mesonet.org/data/public/mesonet/maps/realtime/current.TAIR.grad.png"/>
+    <link>https://www.mesonet.org/data/public/mesonet/maps/realtime/current.TAIR.grad.png</link>
+    <media:content url="https://www.mesonet.org/data/public/mesonet/maps/realtime/current.TAIR.grad.png"/>
   </item>
   <item>
     <title>Wind Chill / Heat Index</title>
-    <link>http://www.mesonet.org/data/public/mesonet/maps/realtime/current.TAPP.grad.png</link>
-    <media:content url="http://www.mesonet.org/data/public/mesonet/maps/realtime/current.TAPP.grad.png"/>
+    <link>https://www.mesonet.org/data/public/mesonet/maps/realtime/current.TAPP.grad.png</link>
+    <media:content url="https://www.mesonet.org/data/public/mesonet/maps/realtime/current.TAPP.grad.png"/>
   </item>
   <item>
     <title>Wind Speed and Direction</title>
-    <link>http://www.mesonet.org/data/public/mesonet/maps/realtime/current.WIND.grad.png</link>
-    <media:content url="http://www.mesonet.org/data/public/mesonet/maps/realtime/current.WIND.grad.png"/>
+    <link>https://www.mesonet.org/data/public/mesonet/maps/realtime/current.WIND.grad.png</link>
+    <media:content url="https://www.mesonet.org/data/public/mesonet/maps/realtime/current.WIND.grad.png"/>
   </item>
   <item>
     <title>Wind Gusts</title>
-    <link>http://www.mesonet.org/data/public/mesonet/maps/realtime/current.WMAX.grad.png</link>
-    <media:content url="http://www.mesonet.org/data/public/mesonet/maps/realtime/current.WMAX.grad.png"/>
+    <link>https://www.mesonet.org/data/public/mesonet/maps/realtime/current.WMAX.grad.png</link>
+    <media:content url="https://www.mesonet.org/data/public/mesonet/maps/realtime/current.WMAX.grad.png"/>
   </item>
   <item>
     <title>Relative Humidity</title>
     <link></link>
-    <media:content url="http://www.mesonet.org/data/public/mesonet/maps/realtime/current.RELH.grad.png"/>
+    <media:content url="https://www.mesonet.org/data/public/mesonet/maps/realtime/current.RELH.grad.png"/>
   </item>
   <item>
     <title>Dewpoint Temperature</title>
     <link></link>
-    <media:content url="http://www.mesonet.org/data/public/mesonet/maps/realtime/current.TDEW.grad.png"/>
+    <media:content url="https://www.mesonet.org/data/public/mesonet/maps/realtime/current.TDEW.grad.png"/>
   </item>
   <item>
     <title>Soil Temperature (2in)</title>
     <link></link>
-    <media:content url="http://www.mesonet.org/data/public/mesonet/maps/realtime/current.TS05.grad.png"/>
+    <media:content url="https://www.mesonet.org/data/public/mesonet/maps/realtime/current.TS05.grad.png"/>
   </item>
   <item>
     <title>Solar Radiation</title>
-    <link>http://www.mesonet.org/data/public/mesonet/maps/realtime/current.TS05.grad.png</link>
-    <media:content url="http://www.mesonet.org/data/public/mesonet/maps/realtime/current.SRAD.grad.png"/>
+    <link>https://www.mesonet.org/data/public/mesonet/maps/realtime/current.TS05.grad.png</link>
+    <media:content url="https://www.mesonet.org/data/public/mesonet/maps/realtime/current.SRAD.grad.png"/>
   </item>
   <item>
     <title>Air Temperature Change (24hr)</title>
-    <link>http://www.mesonet.org/data/public/mesonet/maps/realtime/current.TAIR_24H.grad.png</link>
-    <media:content url="http://www.mesonet.org/data/public/mesonet/maps/realtime/current.TAIR_24H.grad.png"/>
+    <link>https://www.mesonet.org/data/public/mesonet/maps/realtime/current.TAIR_24H.grad.png</link>
+    <media:content url="https://www.mesonet.org/data/public/mesonet/maps/realtime/current.TAIR_24H.grad.png"/>
   </item>
   <item>
     <title>Air Temperature Change (24hr)</title>
-    <link>http://www.mesonet.org/data/public/mesonet/maps/realtime/current.TAIR_24H.grad.png</link>
-    <media:content url="http://www.mesonet.org/data/public/mesonet/maps/realtime/current.TAIR_24H.grad.png"/>
+    <link>https://www.mesonet.org/data/public/mesonet/maps/realtime/current.TAIR_24H.grad.png</link>
+    <media:content url="https://www.mesonet.org/data/public/mesonet/maps/realtime/current.TAIR_24H.grad.png"/>
   </item>
   <item>
     <title>24 Hour Rainfall</title>
-    <link>http://www.mesonet.org/data/public/mesonet/maps/realtime/current.24hour-rainrfc_front580.png</link>
-    <media:content url="http://www.mesonet.org/data/public/mesonet/maps/realtime/current.24hour-rainrfc_front580.png"/>
+    <link>https://www.mesonet.org/data/public/mesonet/maps/realtime/current.24hour-rainrfc_front580.png</link>
+    <media:content url="https://www.mesonet.org/data/public/mesonet/maps/realtime/current.24hour-rainrfc_front580.png"/>
   </item>
 </channel>
 
