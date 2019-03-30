@@ -33,6 +33,7 @@ sources = [
 // all cases with a single operation, but still some sources require their own
 // special handlers.
 function addImage(item, article){
+  var onErrorScript = null;
   // Necessary to reduce object to string, then perform a search for an image
   // URL because all sources seem to include images differently. This is a
   // compromise between createing special code for each source and
@@ -49,10 +50,22 @@ function addImage(item, article){
     // By defaulft, NYTimes images are very small and square.
     // This will make them look more like images provided by other sources.
     if(src.includes('nyt.com/images/') && src.includes('-moth.jpg')){
-      src = src.replace('-moth.jpg', '-facebookJumbo.jpg');
+      src = src.replace('-moth.jpg', '-largeHorizontalJumbo.jpg');
+      onErrorScript = function(){
+        if(!this.src.includes('-facebookLarge.jpg')){
+          this.src = this.src.replace('-largeHorizontalJumbo.jpg', '-facebookLarge.jpg');
+        }
+        if(this.src.includes('-facebookLarge.jpg')){
+          console.log(this);
+          this.remove();
+        }
+      };
+      // threeByTwoLargeAt2X-v2.jpg
+      //static01.nyt.com/images/2019/03/28/us/AFFIRMATIVE-photos-slide-0CY5/AFFIRMATIVE-photos-slide-0CY5-threeByTwoLargeAt2X-v2.jpg?quality=75&auto=webp&disable=upscale&width=1620
     }
     var img = document.createElement('img');
     img.setAttribute('src', src);
+    img.onerror = onErrorScript;
     article.appendChild(img);
   }
 }
@@ -60,42 +73,56 @@ function addImage(item, article){
 // Main function: for parsing feeds and populating #content with thier contents
 var content = document.getElementById('content');
 for(j=0; j<sources.length; j++){
-  function addArticles(){
+  function makeCol(){
     var source = sources[j];
     var column = document.createElement('div');
     column.classList.add('column');
 
-    parser.parseURL(CORS_PROXY + source[1], function(err, feed) {
-      console.log(feed);
-      var a = document.createElement('a');
-      var org = document.createTextNode(source[0]);
-      a.classList.add('org');
-      a.setAttribute('href', feed.link);
-      a.appendChild(org);
-      column.appendChild(a);
-      for(var i=0; i<10; i++){
-        // Create Article
-        var article = document.createElement('a');
-        article.setAttribute('href', feed.items[i].link);
-        // Append Title
-        var h1 = document.createElement('h1');
-        var title = document.createTextNode(feed.items[i].title);
-        h1.appendChild(title);
-        article.appendChild(h1);
-        // Append Image
-        addImage(feed.items[i], article);
-        // Append Snippet
-        var p = document.createElement('p');
-        var content = document.createTextNode(feed.items[i].contentSnippet);
-        p.appendChild(content);
-        article.appendChild(p);
-        article.classList.add('article');
-        column.appendChild(article);
+    function fetchSource(source){
+      // CORS_PROXY +
+      var feed = parser.parseURL(CORS_PROXY + source, function(err, feed) {
+        for(var i=0; i<10; i++){
+          // Create Article
+          var article = document.createElement('a');
+          article.setAttribute('href', feed.items[i].link);
+          // Append Title
+          var h1 = document.createElement('h1');
+          var title = document.createTextNode(feed.items[i].title);
+          h1.appendChild(title);
+          article.appendChild(h1);
+          // Append Image
+          addImage(feed.items[i], article);
+          // Append Snippet
+          var p = document.createElement('p');
+          var content = document.createTextNode(feed.items[i].contentSnippet);
+          p.appendChild(content);
+          article.appendChild(p);
+          article.classList.add('article');
+          column.appendChild(article);
+        }
+      });
+      return feed
+    }
+
+    if(Array.isArray(source[1])){
+      for(k=0; k<source[1].length; k++){
+        console.log(source[1][k]);
+        feed = fetchSource(source[1][k]);
       }
-    });
+    }
+    else{
+      console.log(source[1]);
+      feed = fetchSource(source[1]);
+    }
+    var a = document.createElement('a');
+    var org = document.createTextNode(source[0]);
+    a.classList.add('org');
+    if('link' in feed){a.setAttribute('href', feed.link)};
+    a.appendChild(org);
+    column.insertBefore(a, column.firstChild);
     return column;
   }
-  content.appendChild(addArticles());
+  content.appendChild(makeCol());
 }
 
 // Sets date at top of page
