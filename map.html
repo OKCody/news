@@ -1,0 +1,58 @@
+<!-- Source: https://radar.weather.gov/ridge/radar.php?rid=tlx&product=N0R&overlay=11101111&loop=no -->
+<html>
+<head>
+<style>
+#frame_1{
+  margin-top: -350px;
+  margin-left: -450px;
+  width: 940px;
+  height: 800px;
+  overflow: hidden;
+}
+#frame_2{
+width: 1200px;
+height: 1142px;
+}
+img{
+display:block;
+width: 50%;
+}
+.left{
+float:left;
+}
+.right{
+float: right;
+}
+#_1{
+  z-index: 3;
+}
+#_2{
+  position: relative;
+  z-index: 2;
+  left: -143px;
+}
+#_3{
+  position: relative;
+  z-index: 1;
+  left: 127.4px;
+  top: 47px;
+}
+#_4{
+  position: relative;
+  z-index: 3;
+  top: -125;
+  left: -257px;
+}
+</style>
+</head>
+<body>
+<div id=frame_1>
+<div id='frame_2'>
+<img id='_1' class='left' src='https://radar.weather.gov/Conus/Loop/northrockies_loop.gif'></img>
+<img id='_2' class='right' src='https://radar.weather.gov/Conus/Loop/uppermissvly_loop.gif'></img>
+<img id='_3' class='left' src='https://radar.weather.gov/Conus/Loop/southrockies_loop.gif'></img>
+<img id='_4' class='right' src='https://radar.weather.gov/Conus/Loop/southplains_loop.gif'></img>
+</div>
+</div>
+</body>
+</html>
