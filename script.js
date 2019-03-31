@@ -1,7 +1,6 @@
 // Note: some RSS feeds can't be loaded in the browser due to CORS security.
 // To get around this, you can use a proxy.
-//CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
-CORS_PROXY = "https://cors.io/?"
+CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
 
 parser = new RSSParser({
   defaultRSS: 2.0,
