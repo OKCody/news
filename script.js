@@ -81,6 +81,7 @@ for(j=0; j<sources.length; j++){
     function fetchSource(source){
       // CORS_PROXY +
       var feed = parser.parseURL(CORS_PROXY + source, function(err, feed) {
+        console.log(feed);
         for(var i=0; i<10; i++){
           // Create Article
           var article = document.createElement('a');
