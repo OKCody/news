@@ -13,7 +13,7 @@ parser = new RSSParser({
       ['title_detail', 'title_detail']
     ]
   },
-  headers: {'Access-Control-Allow-Origin':'*',}
+  headers: {'Access-Control-Allow-Origin':'*'}
 });
 
 /*  // Example source format expected by main function
