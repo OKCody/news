@@ -4,6 +4,7 @@ CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
 
 parser = new RSSParser({
   defaultRSS: 2.0,
+  headers: {'X-Requested-With', 'XMLHttpRequest'},
   customFields: {
     item: [
       ['media:content', 'media:content'],
