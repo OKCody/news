@@ -159,67 +159,55 @@ window.addEventListener('resize', function(){
   if(window.innerWidth <= 1000 && menu.style.display == 'block'){
     menu.style.display = 'none';
   }
+  // Set up mobile view and horizontal pan events for one-column
+  if(window.innerWithd <= 1000){
+    for(var m=0; m<columns.length; m++){
+      columns[m].style.display = 'none';
+    }
+    columns[col].style.display = 'block';
+  }
 });
 
 
 // Get a reference to an element.
 var content = document.querySelector('#content');
-
 // Create an instance of Hammer with the reference.
-var hammer = new Hammer(content);
-
-
-var col = 0;
-var columns = document.querySelectorAll('.column');
-for(var m=0; m<columns.length; m++){
-  columns[m].style.display = 'none';
-}
-columns[col].style.display = 'block';
-
+hammer = new Hammer(content);
+col = 0;
+columns = document.querySelectorAll('.column');
+debounce = 0;
 
 var width = window.innerWidth;
 // Subscribe to a quick start event: press, tap, or doubletap.
 // For a full list of quick start events, read the documentation.
 hammer.on('panmove panstart', function(e) {
-  if(e.deltaX/e.deltaY > 10 && e.distance/width > .333){
-    console.log('right: ',e.deltaX/e.deltaY, e.distance/width);
-
+  if(e.deltaX > 0){
+    var dir = 'left';
+  }
+  else{
+    var dir = 'right';
+  }
+  if(dir == 'left' && Math.abs(e.deltaX/e.deltaY) > 10  && e.distance/width > .25 && debounce == 0){
+    debounce = 1;
     for(var m=0; m<columns.length; m++){
       columns[m].style.display = 'none';
     }
-    col = col - 1;
-    if(0 <= col && col <= columns.length){
-      setTimeout(function(){
-        columns[col].style.display = 'block';
-      }, 100);
+    if(0 < col && col <= columns.length - 1){
+      col = col - 1;
     }
   }
-  if(e.deltaX/e.deltaY < -10 && e.distance/width > .333){
-    console.log('left: ',e.deltaX/e.deltaY, e.distance/width);
-
+  if(dir == 'right' && Math.abs(e.deltaX/e.deltaY) > 10 && e.distance/width > .25 && debounce == 0){
+    debounce = 1;
     for(var m=0; m<columns.length; m++){
       columns[m].style.display = 'none';
     }
-    col = col + 1;
-    if(0 <= col && col <= columns.length){
-      setTimeout(function(){
-        columns[col].style.display = 'block';
-      }, 100);
+    if(0 <= col && col < columns.length - 1){
+      col = col + 1;
     }
   }
+  setTimeout(function(){
+    debounce = 0;
+  }, 500);
+  columns[col].style.display = 'block';
+  console.log(e.deltaX/e.deltaY, e.distance/width, col, debounce);
 });
-
-/*
-hammer.on('panleft', function(e) {
-  if(e.deltaX/e.deltaY < -10 && e.distance/width > .333){
-    console.log('left: ',e.deltaX/e.deltaY, e.distance/width);
-
-    for(var m=0; m<columns.length; m++){
-      columns[m].style.display = 'none';
-    }
-    col += -1;
-    columns[col].style.display = 'block';
-
-  }
-});
-*/
