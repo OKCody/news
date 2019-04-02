@@ -160,7 +160,7 @@ window.addEventListener('resize', function(){
     menu.style.display = 'none';
   }
   // Set up mobile view and horizontal pan events for one-column
-  if(window.innerWithd <= 1000){
+  if(window.innerWidth < 1000){
     for(var m=0; m<columns.length; m++){
       columns[m].style.display = 'none';
     }
@@ -187,7 +187,50 @@ hammer.on('panmove panstart', function(e) {
   else{
     var dir = 'right';
   }
-  if(dir == 'left' && Math.abs(e.deltaX/e.deltaY) > 10  && e.distance/width > .25 && debounce == 0){
+
+  /*
+  var debounce = true;  // as in allow pan to occur
+  // Left-most column to display
+  var ref = 0;
+  // Set up breakpoints. cols is number of columns to display in addition to reference or 0th column
+  if(width < 1000){
+    // Desktop, cols = 3
+  }
+  if(750 < width && width <= 1000){
+    // Tablet, cols = 1
+  }
+  if(width <= 750){
+    // Phone, cols = 0
+  }
+  if(Math.abs(e.deltaX/e.deltaY) > 10 && e.distance/width > .25 && debounce){
+    if(e.deltaX > 0){
+      for(var k=columns.length; k>0; k--){
+        if(k>k-ref && k>0){
+          columns[k].style.display = 'block';
+        }
+        else{
+          columns[k].style.display = 'none';
+        }
+      }
+    }
+    if(e.deltaX < 0){
+      for(var k=ref; k<columns.length; k++){
+        if(k<k+ref){
+          columns[k].style.display = 'block';
+        }
+        else{
+          columns[k].style.display = 'none';
+        }
+      }
+    }
+    setTimeout(function(){
+      debounce = false;  // as in do not allow pan to occur
+    },500);
+    console.log(e.deltaX/e.deltaY, e.distance/width, col, debounce);
+  }
+
+  */
+  if(dir == 'left' && Math.abs(e.deltaX/e.deltaY) > 10 && e.distance/width > .25 && debounce == 0){
     debounce = 1;
     for(var m=0; m<columns.length; m++){
       columns[m].style.display = 'none';
