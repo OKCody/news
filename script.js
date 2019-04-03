@@ -159,4 +159,98 @@ window.addEventListener('resize', function(){
   if(window.innerWidth <= 1000 && menu.style.display == 'block'){
     menu.style.display = 'none';
   }
+  // Set up mobile view and horizontal pan events for one-column
+  if(window.innerWidth < 1000){
+    for(var m=0; m<columns.length; m++){
+      columns[m].style.display = 'none';
+    }
+    columns[col].style.display = 'block';
+  }
+});
+
+
+// Get a reference to an element.
+var content = document.querySelector('#content');
+// Create an instance of Hammer with the reference.
+hammer = new Hammer(content);
+col = 0;
+columns = document.querySelectorAll('.column');
+debounce = 0;
+
+var width = window.innerWidth;
+// Subscribe to a quick start event: press, tap, or doubletap.
+// For a full list of quick start events, read the documentation.
+hammer.on('panmove panstart', function(e) {
+  if(e.deltaX > 0){
+    var dir = 'left';
+  }
+  else{
+    var dir = 'right';
+  }
+
+  /*
+  var debounce = true;  // as in allow pan to occur
+  // Left-most column to display
+  var ref = 0;
+  // Set up breakpoints. cols is number of columns to display in addition to reference or 0th column
+  if(width < 1000){
+    // Desktop, cols = 3
+  }
+  if(750 < width && width <= 1000){
+    // Tablet, cols = 1
+  }
+  if(width <= 750){
+    // Phone, cols = 0
+  }
+  if(Math.abs(e.deltaX/e.deltaY) > 10 && e.distance/width > .25 && debounce){
+    if(e.deltaX > 0){
+      for(var k=columns.length; k>0; k--){
+        if(k>k-ref && k>0){
+          columns[k].style.display = 'block';
+        }
+        else{
+          columns[k].style.display = 'none';
+        }
+      }
+    }
+    if(e.deltaX < 0){
+      for(var k=ref; k<columns.length; k++){
+        if(k<k+ref){
+          columns[k].style.display = 'block';
+        }
+        else{
+          columns[k].style.display = 'none';
+        }
+      }
+    }
+    setTimeout(function(){
+      debounce = false;  // as in do not allow pan to occur
+    },500);
+    console.log(e.deltaX/e.deltaY, e.distance/width, col, debounce);
+  }
+
+  */
+  if(dir == 'left' && Math.abs(e.deltaX/e.deltaY) > 10 && e.distance/width > .25 && debounce == 0){
+    debounce = 1;
+    for(var m=0; m<columns.length; m++){
+      columns[m].style.display = 'none';
+    }
+    if(0 < col && col <= columns.length - 1){
+      col = col - 1;
+    }
+  }
+  if(dir == 'right' && Math.abs(e.deltaX/e.deltaY) > 10 && e.distance/width > .25 && debounce == 0){
+    debounce = 1;
+    for(var m=0; m<columns.length; m++){
+      columns[m].style.display = 'none';
+    }
+    if(0 <= col && col < columns.length - 1){
+      col = col + 1;
+    }
+  }
+  setTimeout(function(){
+    debounce = 0;
+  }, 500);
+  columns[col].style.display = 'block';
+  console.log(e.deltaX/e.deltaY, e.distance/width, col, debounce);
 });
