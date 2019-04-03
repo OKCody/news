@@ -12,7 +12,9 @@ parser = new RSSParser({
       ['content:encoded', 'content:encoded'],
       ['title_detail', 'title_detail']
     ]
-  }
+  },
+  header: {'pragma': 'no-cache',
+           'cache-control': 'no-cache'}
 });
 
 /*  // Example source format expected by main function
@@ -80,6 +82,16 @@ for(j=0; j<sources.length; j++){
 
     function fetchSource(source){
       // CORS_PROXY +
+      var d = new Date();
+      /*
+      var bust = d.getFullYear().toString() +
+                 d.getMonth().toString() +
+                 d.getDate().toString() +
+                 d.getHours().toString() +
+                 d.getMinutes().toString() +
+                 d.getMinutes().toString() +
+                 d.getSeconds().toString();
+      */
       var feed = parser.parseURL(CORS_PROXY + source, function(err, feed) {
         console.log(feed);
         for(var i=0; i<10; i++){
@@ -230,7 +242,7 @@ hammer.on('panmove panstart', function(e) {
   }
 
   */
-  if(dir == 'left' && Math.abs(e.deltaX/e.deltaY) > 10 && e.distance/width > .25 && debounce == 0){
+  if(dir == 'left' && Math.abs(e.deltaX/e.deltaY) > 1 && e.distance/width > .25 && debounce == 0){
     debounce = 1;
     for(var m=0; m<columns.length; m++){
       columns[m].style.display = 'none';
@@ -239,7 +251,7 @@ hammer.on('panmove panstart', function(e) {
       col = col - 1;
     }
   }
-  if(dir == 'right' && Math.abs(e.deltaX/e.deltaY) > 10 && e.distance/width > .25 && debounce == 0){
+  if(dir == 'right' && Math.abs(e.deltaX/e.deltaY) > 1 && e.distance/width > .25 && debounce == 0){
     debounce = 1;
     for(var m=0; m<columns.length; m++){
       columns[m].style.display = 'none';
