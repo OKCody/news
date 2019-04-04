@@ -72,6 +72,11 @@ body{
   -webkit-overflow-scrolling: touch;
   scroll-snap-points-x: repeat(100%);
 }
+.org{
+  font-weight: 700;
+  text-align: center;
+  font-size: 1.5em;
+}
 #footer{
   display: block;
   height: 2em;

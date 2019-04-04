@@ -107,7 +107,7 @@ for(j=0; j<sources.length; j++){
           addImage(feed.items[i], article);
           // Append Snippet
           var p = document.createElement('p');
-          var content = document.createTextNode(feed.items[i].contentSnippet);
+          var content = document.createTextNode(feed.items[i].contentSnippet.slice(0,280));
           p.appendChild(content);
           article.appendChild(p);
           article.classList.add('article');
@@ -127,12 +127,12 @@ for(j=0; j<sources.length; j++){
       console.log(source[1]);
       feed = fetchSource(source[1]);
     }
-    var a = document.createElement('a');
+    var div = document.createElement('div');
     var org = document.createTextNode(source[0]);
-    a.classList.add('org');
+    div.classList.add('org');
     if('link' in feed){a.setAttribute('href', feed.link)};
-    a.appendChild(org);
-    column.insertBefore(a, column.firstChild);
+    div.appendChild(org);
+    column.insertBefore(div, column.firstChild);
     return column;
   }
   content.appendChild(makeCol());
@@ -171,98 +171,84 @@ window.addEventListener('resize', function(){
   if(window.innerWidth <= 1000 && menu.style.display == 'block'){
     menu.style.display = 'none';
   }
-  // Set up mobile view and horizontal pan events for one-column
-  if(window.innerWidth < 1000){
-    for(var m=0; m<columns.length; m++){
-      columns[m].style.display = 'none';
+  // Set up breakpoints. cols is number of columns to display in addition to reference or 0th column
+  width = window.innerWidth;
+  if(width > 1000){
+    ref=0;
+    cols = columns.length;  // Desktop
+  }
+  if(750 < width && width <= 1000){
+    cols = 1;  // Tablet
+  }
+  if(width <= 750){
+    cols = 0;  // Phone
+  }
+  for(var k=0; k<columns.length; k++){
+    if(ref<=k && k<=(ref+cols)){
+      columns[k].style.display = 'block';
     }
-    columns[col].style.display = 'block';
+    else{
+      columns[k].style.display = 'none';
+    }
   }
 });
 
 
 // Get a reference to an element.
-var content = document.querySelector('#content');
+content = document.querySelector('#content');
 // Create an instance of Hammer with the reference.
 hammer = new Hammer(content);
-col = 0;
+cols = 0;
 columns = document.querySelectorAll('.column');
-debounce = 0;
+debounce = true;  // as in allow pan to occur
+// Left-most column to display
+ref = 0;
 
-var width = window.innerWidth;
+width = window.innerWidth;
 // Subscribe to a quick start event: press, tap, or doubletap.
 // For a full list of quick start events, read the documentation.
 hammer.on('panmove panstart', function(e) {
-  if(e.deltaX > 0){
-    var dir = 'left';
-  }
-  else{
-    var dir = 'right';
-  }
 
-  /*
-  var debounce = true;  // as in allow pan to occur
-  // Left-most column to display
-  var ref = 0;
   // Set up breakpoints. cols is number of columns to display in addition to reference or 0th column
-  if(width < 1000){
-    // Desktop, cols = 3
+  if(width > 1000){
+    ref = 0;
+    cols = columns.length;  // Desktop
   }
   if(750 < width && width <= 1000){
-    // Tablet, cols = 1
+    cols = 1;  // Tablet
   }
   if(width <= 750){
-    // Phone, cols = 0
+    cols = 0;  // Phone
   }
   if(Math.abs(e.deltaX/e.deltaY) > 10 && e.distance/width > .25 && debounce){
+    debounce = false;  // debounce // as in do not allow pan to occur
+    // pan left
     if(e.deltaX > 0){
-      for(var k=columns.length; k>0; k--){
-        if(k>k-ref && k>0){
-          columns[k].style.display = 'block';
-        }
-        else{
-          columns[k].style.display = 'none';
-        }
+      if(ref > 0){
+        ref = ref - 1;
       }
     }
+    // pan right
     if(e.deltaX < 0){
-      for(var k=ref; k<columns.length; k++){
-        if(k<k+ref){
-          columns[k].style.display = 'block';
-        }
-        else{
-          columns[k].style.display = 'none';
-        }
+      if((ref+cols)<columns.length-1){
+        ref = ref + 1;
       }
     }
-    setTimeout(function(){
-      debounce = false;  // as in do not allow pan to occur
-    },500);
-    console.log(e.deltaX/e.deltaY, e.distance/width, col, debounce);
-  }
+    for(var k=0; k<columns.length; k++){
+      if(ref<=k && k<=(ref+cols)){
+        columns[k].style.display = 'block';
+      }
+      else{
+        columns[k].style.display = 'none';
+      }
+    }
+    content.scrollTo(scrollX,0); // reset scroll position to top of page on pan
 
-  */
-  if(dir == 'left' && Math.abs(e.deltaX/e.deltaY) > 1 && e.distance/width > .25 && debounce == 0){
-    debounce = 1;
-    for(var m=0; m<columns.length; m++){
-      columns[m].style.display = 'none';
-    }
-    if(0 < col && col <= columns.length - 1){
-      col = col - 1;
-    }
+    setTimeout(function(){
+      debounce = true;  // turn off debounce // allow pan to occur
+    },500);
+
   }
-  if(dir == 'right' && Math.abs(e.deltaX/e.deltaY) > 1 && e.distance/width > .25 && debounce == 0){
-    debounce = 1;
-    for(var m=0; m<columns.length; m++){
-      columns[m].style.display = 'none';
-    }
-    if(0 <= col && col < columns.length - 1){
-      col = col + 1;
-    }
-  }
-  setTimeout(function(){
-    debounce = 0;
-  }, 500);
-  columns[col].style.display = 'block';
-  console.log(e.deltaX/e.deltaY, e.distance/width, col, debounce);
+  console.log(e.deltaX/e.deltaY, e.distance/width, ref, cols, debounce);
+
 });
