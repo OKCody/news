@@ -191,6 +191,7 @@ window.addEventListener('resize', function(){
       columns[k].style.display = 'none';
     }
   }
+  console.log('resize');
 });
 
 
@@ -250,5 +251,26 @@ hammer.on('panmove panstart', function(e) {
 
   }
   console.log(e.deltaX/e.deltaY, e.distance/width, ref, cols, debounce);
-
 });
+
+// Set up breakpoints. cols is number of columns to display in addition to reference or 0th column
+width = window.innerWidth;
+if(width > 1000){
+  ref=0;
+  cols = columns.length;  // Desktop
+}
+if(750 < width && width <= 1000){
+  cols = 1;  // Tablet
+}
+if(width <= 750){
+  cols = 0;  // Phone
+}
+for(var k=0; k<columns.length; k++){
+  if(ref<=k && k<=(ref+cols)){
+    columns[k].style.display = 'block';
+  }
+  else{
+    columns[k].style.display = 'none';
+  }
+}
+console.log('load');
