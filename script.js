@@ -1,6 +1,6 @@
 // Note: some RSS feeds can't be loaded in the browser due to CORS security.
 // To get around this, you can use a proxy.
-CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
+CORS_PROXY = 'https://cody-cors.herokuapp.com/'; //"https://cors-anywhere.herokuapp.com/";
 
 parser = new RSSParser({
   defaultRSS: 2.0,
@@ -35,6 +35,7 @@ sources = [
 // all cases with a single operation, but still some sources require their own
 // special handlers.
 function addImage(item, article){
+  var img = document.createElement('img');
   var onErrorScript = null;
   // Necessary to reduce object to string, then perform a search for an image
   // URL because all sources seem to include images differently. This is a
@@ -65,7 +66,14 @@ function addImage(item, article){
       // threeByTwoLargeAt2X-v2.jpg
       //static01.nyt.com/images/2019/03/28/us/AFFIRMATIVE-photos-slide-0CY5/AFFIRMATIVE-photos-slide-0CY5-threeByTwoLargeAt2X-v2.jpg?quality=75&auto=webp&disable=upscale&width=1620
     }
-    var img = document.createElement('img');
+    // NPR: For articles that do not include an image, NPR inserts a 1x1px image
+    // for tracking purposes. I'm fine with this, I want NPR to know I'm using
+    // their RSS feed so that they keep supporting it, but I don't want it to
+    // cause display problems like it is so I'm setting them to
+    // display: none here.
+    if(src == 'https://media.npr.org/include/images/tracking/npr-rss-pixel.png'){
+      img.setAttribute('style', 'display:none');
+    }
     img.setAttribute('src', src);
     img.onerror = onErrorScript;
     article.appendChild(img);
@@ -83,15 +91,6 @@ for(j=0; j<sources.length; j++){
     function fetchSource(source){
       // CORS_PROXY +
       var d = new Date();
-      /*
-      var bust = d.getFullYear().toString() +
-                 d.getMonth().toString() +
-                 d.getDate().toString() +
-                 d.getHours().toString() +
-                 d.getMinutes().toString() +
-                 d.getMinutes().toString() +
-                 d.getSeconds().toString();
-      */
       var feed = parser.parseURL(CORS_PROXY + source, function(err, feed) {
         console.log(feed);
         for(var i=0; i<10; i++){
@@ -99,17 +98,18 @@ for(j=0; j<sources.length; j++){
           var article = document.createElement('a');
           article.setAttribute('href', feed.items[i].link);
           // Append Title
-          var h1 = document.createElement('h1');
-          var title = document.createTextNode(feed.items[i].title);
-          h1.appendChild(title);
-          article.appendChild(h1);
+          var headline = document.createElement('h1');
+          headline.innerHTML = unescape(feed.items[i].title);
+          article.appendChild(headline);
           // Append Image
           addImage(feed.items[i], article);
           // Append Snippet
-          var p = document.createElement('p');
-          var content = document.createTextNode(feed.items[i].contentSnippet.slice(0,280));
-          p.appendChild(content);
-          article.appendChild(p);
+          var snippet = document.createElement('p');
+          snippet.innerHTML = unescape(feed.items[i].contentSnippet.slice(0,280));
+          //p.appendChild(content);
+          article.appendChild(snippet);
+          // Append Date
+
           article.classList.add('article');
           column.appendChild(article);
         }
