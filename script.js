@@ -55,12 +55,15 @@ function addImage(item, article){
     if(src.includes('nyt.com/images/') && src.includes('-moth.jpg')){
       src = src.replace('-moth.jpg', '-largeHorizontalJumbo.jpg');
       onErrorScript = function(){
-        if(!this.src.includes('-facebookLarge.jpg')){
+        if(this.src.includes('-largeHorizontalJumbo.jpg')){
+          console.log('facebook');
+          this.setAttribute('data', 'moth');
           this.src = this.src.replace('-largeHorizontalJumbo.jpg', '-facebookLarge.jpg');
         }
-        if(this.src.includes('-facebookLarge.jpg')){
-          console.log(this);
-          this.remove();
+        if(this.src.includes('-facebookLarge.jpg') && this.getAttribute('data') == 'moth'){
+          console.log('moth');
+          this.setAttribute('data', 'remove');
+          this.src = this.src.replace('-facebookLarge.jpg', '-moth.jpg');
         }
       };
       // threeByTwoLargeAt2X-v2.jpg
@@ -104,10 +107,11 @@ for(j=0; j<sources.length; j++){
           // Append Image
           addImage(feed.items[i], article);
           // Append Snippet
-          var snippet = document.createElement('p');
-          snippet.innerHTML = unescape(feed.items[i].contentSnippet.slice(0,280));
-          //p.appendChild(content);
-          article.appendChild(snippet);
+          if(feed.items[i].contentSnippet){
+            var snippet = document.createElement('p');
+            snippet.innerHTML = unescape(feed.items[i].contentSnippet.slice(0,280));
+            article.appendChild(snippet);
+          }
           // Append Date
 
           article.classList.add('article');
