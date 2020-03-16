@@ -6,6 +6,16 @@ Motivation for building News grew out of frustration with Apple News which never
 
 News directly displays the RSS feeds of sources I've personally selected to suit my own taste. Please fork the gh-pages branch of this repo and make it your own.
 
+## Build Locally
+
+To build the site locally, run,
+```
+bundle exec jekyll build
+```
+then navigate to [http://localhost:4000](http://localhost:4000).
+
+Make changes if desired, push to 'dev' branch and merge with gh-pages branch to deploy.
+
 ## Customization
 
 ### Feeds
