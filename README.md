@@ -8,7 +8,7 @@ News directly displays the RSS feeds of sources I've personally selected to suit
 
 ## Build Locally
 
-To build the site locally, run,
+To build the site locally [install Jekyll](https://jekyllrb.com/docs/installation/), then run,
 ```
 bundle exec jekyll build
 ```
