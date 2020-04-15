@@ -10,7 +10,7 @@ News directly displays the RSS feeds of sources I've personally selected to suit
 
 To build the site locally [install Jekyll](https://jekyllrb.com/docs/installation/), then run,
 ```
-bundle exec jekyll build
+bundle exec jekyll serve
 ```
 then navigate to [http://localhost:4000](http://localhost:4000).
 
