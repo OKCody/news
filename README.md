@@ -2,15 +2,15 @@
 
 A personal news RSS feed aggregator, News is built using Jekyll and Github Pages. Meant to be easy to swap out feeds in order to personalize to taste.
 
-Motivation for building News grew out of frustration with Apple News which never quite seemed to understand my interests and my skepticism about algorithms choosing which news I should see.
+Motivation for building News grew out of frustration with Apple News which never quite seemed to understand my interests and having full control over the news sources I see.
 
 News directly displays the RSS feeds of sources I've personally selected to suit my own taste. Please fork the gh-pages branch of this repo and make it your own.
 
 ## Build Locally
 
-To build the site locally, run,
+To build the site locally [install Jekyll](https://jekyllrb.com/docs/installation/), then run,
 ```
-bundle exec jekyll build
+bundle exec jekyll serve
 ```
 then navigate to [http://localhost:4000](http://localhost:4000).
 
@@ -20,7 +20,7 @@ Make changes if desired, push to 'dev' branch and merge with gh-pages branch to 
 
 ### Feeds
 
-Feed URLs and their titles are specified in the front matter of each categories page in the format of a javascript array of arrays,
+Feed URLs and their titles are specified in the front matter of each category's page in the format of a javascript array of arrays,
 
 ```
 var sources = [
