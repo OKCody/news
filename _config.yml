@@ -1,2 +1,135 @@
 title: News
-description: This is personal RSS feed aggregator
+description: Personal RSS feed aggregator
+
+sources:
+  Art:
+    NY Times:
+      - http://rss.nytimes.com/services/xml/rss/nyt/Arts.xml
+    NPR:
+      - https://www.npr.org/rss/rss.php?id=1008
+    Pitchfork:
+      - https://pitchfork.com/rss/all
+    Rolling Stone:
+      - https://www.rollingstone.com/movies/feed/
+      - https://www.rollingstone.com/tv/feed/
+      - https://www.rollingstone.com/music/feed
+    r/ListenToThis:
+      - https://www.reddit.com/r/ListenToThis.rss
+    PetaPixel:
+      - https://petapixel.com/feed/
+  Business:
+    NY Times:
+      - http://rss.nytimes.com/services/xml/rss/nyt/Business.xml
+    NPR:
+      - https://www.npr.org/rss/rss.php?id=1006
+    The Atlantic:
+      - https://www.theatlantic.com/feed/channel/business/
+    Motley Fool:
+      - https://www.fool.com/a/feeds/foolwatch?format=rss2&id=foolwatch&apikey=foolwatch-feed
+    Seeking Alpha:
+      - https://seekingalpha.com/api/sa/combined/BA.xml
+      - https://seekingalpha.com/api/sa/combined/AAPL.xml
+      - https://seekingalpha.com/api/sa/combined/AMT.xml
+  COVID-19:
+    US CDC:
+      - https://tools.cdc.gov/api/v2/resources/media/403372.rss
+    WHO:
+      - https://www.who.int/rss-feeds/news-english.xml
+    NY Times:
+      - https://rss.nytimes.com/services/xml/rss/nyt/Health.xml
+    NPR:
+      - https://www.npr.org/rss/rss.php?id=1031
+    Mayo Clinic:
+      - https://newsnetwork.mayoclinic.org/category/covid-19/feed/
+  Headlines:
+    NY Times:
+      - http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml
+    NPR:
+      - https://www.npr.org/rss/rss.php?id=1019
+    PBS:
+      - https://www.pbs.org/newshour/feeds/rss/headlines
+    BBC:
+      - http://feeds.bbci.co.uk/news/rss.xml
+    Al Jazeera:
+      - https://www.aljazeera.com/xml/rss/all.xml
+    Reuters:
+      - http://feeds.reuters.com/reuters/topNews?format=xml
+    AP:
+      - http://twitrss.me/twitter_user_to_rss/?user=AP
+  Oklahoma:
+    KGOU:
+      - https://kgou.drupal.publicbroadcasting.net/rss-local.xml
+    KOSU:
+      - http://www.kosu.org/rss.xml
+    OK Gazette:
+      - https://www.okgazette.com/oklahoma/Rss.xml
+    NonDoc:
+      - https://nondoc.com/feed/
+    Tinker Takeoff:
+      - http://journalrecord.com/tinkertakeoff/feed/
+    OU Daily:
+      - http://www.oudaily.com/search/?f=rss&k=%22homepage%20news%22
+  Politics:
+    NY Times:
+      - http://rss.nytimes.com/services/xml/rss/nyt/Politics.xml
+    NPR:
+      - https://www.npr.org/rss/rss.php?id=1014
+    The Atlantic:
+      - https://www.theatlantic.com/feed/channel/politics/
+    Politifact:
+      - https://www.politifact.com/feeds/statements/truth-o-meter/
+    FactCheck.org:
+      - https://www.factcheck.org/feed/
+  Popular:
+    NY Times:
+      - http://rss.nytimes.com/services/xml/rss/nyt/Business.xml
+    NPR:
+      - https://www.npr.org/rss/rss.php?id=1048
+    Rolling Stone:
+      - https://www.rollingstone.com/culture/feed/
+    The Atlantic:
+      - https://www.theatlantic.com/feed/channel/entertainment/
+  Science:
+    NY Times:
+      - http://rss.nytimes.com/services/xml/rss/nyt/Science.xml
+    NPR:
+      - https://www.npr.org/rss/rss.php?id=1007
+    The Atlantic:
+      - https://www.theatlantic.com/feed/channel/science/
+  Personal:
+    Hackaday:
+      - https://hackaday.com/blog/feed/
+    Boeing:
+      - https://news.google.com/rss/search?q=boeing&sources=news&hl=en-US&gl=US&ceid=US:en
+    Markdown:
+      - https://news.google.com/rss/search?q=markdown+writing&sources=news&hl=en-US&gl=US&ceid=US:en
+    OER:
+      - https://news.google.com/rss/search?q=open+educational+resources&sources=news&hl=en-US&gl=US&ceid=US:en
+  Technology:
+    NY Times:
+      - http://rss.nytimes.com/services/xml/rss/nyt/Technology.xml
+    NPR:
+      - https://www.npr.org/rss/rss.php?id=1019
+    The Verge:
+      - http://www.theverge.com/rss/index.xml
+    The Atlantic:
+      - https://www.theatlantic.com/feed/channel/technology/
+  Weather:
+    NOAA:
+      - https://w1.weather.gov/xml/current_obs/KOKC.rss
+      - https://w1.weather.gov/xml/current_obs/KPWA.rss
+      - https://w1.weather.gov/xml/current_obs/KTIK.rss
+      - https://w1.weather.gov/xml/current_obs/KOUN.rss
+      - https://w1.weather.gov/xml/current_obs/KSNL.rss
+      - https://w1.weather.gov/xml/current_obs/KWDG.rss
+      - https://w1.weather.gov/xml/current_obs/KADM.rss
+      - https://w1.weather.gov/xml/current_obs/KTUL.rss
+    Mesonet:
+      - https://raw.githack.com/OKCody/current/gh-pages/wx.xml
+  World:
+    NY Times:
+      - http://rss.nytimes.com/services/xml/rss/nyt/Science.xml
+    NPR:
+      - https://www.npr.org/rss/rss.php?id=1007
+    The Atlantic:
+      - https://www.theatlantic.com/feed/channel/international/
