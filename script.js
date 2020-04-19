@@ -14,8 +14,7 @@ parser = new RSSParser({
     ]
   },
   header: {'pragma': 'no-cache',
-           'cache-control': 'no-cache',
-           'origin': '*'}
+           'cache-control': 'no-cache'}
 });
 
 /*  // Example source format expected by main function
@@ -79,64 +78,84 @@ function addImage(item, article){
   }
 }
 
-// Main function: for parsing feeds and populating #content with thier contents
-var content = document.getElementById('content');
-for(j=0; j<sources.length; j++){
-  function makeCol(){
-    var source = sources[j];
-    var column = document.createElement('div');
-    column.classList.add('column');
 
-    function fetchSource(source){
-      // CORS_PROXY +
-      var d = new Date();
-      var feed = parser.parseURL(CORS_PROXY + source, function(err, feed) {
-        console.log(feed);
-        for(var i=0; i<10; i++){
-          // Create Article
-          var article = document.createElement('a');
-          article.setAttribute('href', feed.items[i].link);
-          // Append Title
-          var headline = document.createElement('h1');
-          headline.innerHTML = unescape(feed.items[i].title);
-          article.appendChild(headline);
-          // Append Image
-          addImage(feed.items[i], article);
-          // Append Snippet
-          if(feed.items[i].contentSnippet){
-            var snippet = document.createElement('p');
-            snippet.innerHTML = unescape(feed.items[i].contentSnippet.slice(0,280));
-            article.appendChild(snippet);
-          }
-          // Append Date
 
-          article.classList.add('article');
-          column.appendChild(article);
-        }
-      });
-      return feed
-    }
-
-    if(Array.isArray(source[1])){
-      for(k=0; k<source[1].length; k++){
-        console.log(source[1][k]);
-        feed = fetchSource(source[1][k]);
+function fetchSource(column, source){
+  // CORS_PROXY +
+  var d = new Date();
+  var feed = parser.parseURL(CORS_PROXY + source, function(err, feed) {
+    console.log(feed);
+    for(var i=0; i<10; i++){
+      // Create Article
+      var article = document.createElement('a');
+      article.setAttribute('href', feed.items[i].link);
+      // Append Title
+      var headline = document.createElement('h1');
+      headline.innerHTML = unescape(feed.items[i].title);
+      article.appendChild(headline);
+      // Append Image
+      addImage(feed.items[i], article);
+      // Append Snippet
+      if(feed.items[i].contentSnippet){
+        var snippet = document.createElement('p');
+        snippet.innerHTML = unescape(feed.items[i].contentSnippet.slice(0,280));
+        article.appendChild(snippet);
       }
+      // Append Date
+
+      article.classList.add('article');
+      column.appendChild(article);
     }
-    else{
-      console.log(source[1]);
-      feed = fetchSource(source[1]);
-    }
-    var div = document.createElement('div');
-    var org = document.createTextNode(source[0]);
-    div.classList.add('org');
-    if('link' in feed){a.setAttribute('href', feed.link)};
-    div.appendChild(org);
-    column.insertBefore(div, column.firstChild);
-    return column;
-  }
-  content.appendChild(makeCol());
+  });
+  return column
 }
+
+
+
+if(window.location.hash) {
+  var page = decodeURIComponent(window.location.hash.replace('#',''));
+  console.log(page);
+} else {
+  var page = 'Headlines';
+}
+document.getElementById('title').innerHTML = '<h1>News: '+ page +'</h1>';
+// Main function: for parsing feeds and populating #content with thier contents
+var pageSources = sources[page];
+var k = Object.keys(pageSources);
+//var sources = sources[k[]]
+var content = document.getElementById('content');
+for(j=0; j<k.length; j++){
+  // make column
+  console.log('makeCol');
+  var column = document.createElement('div');
+  column.classList.add('column');
+  var div = document.createElement('div');
+  var org = document.createTextNode(k[j]);
+  div.appendChild(org);
+  div.classList.add('org');
+  column.appendChild(div);
+  for (m=0; m<pageSources[k[j]].length; m++){
+    // append articles
+    console.log(pageSources[k[j]][m]);
+    content.appendChild(fetchSource(column, pageSources[k[j]][m]));
+  }
+}
+
+// Create menu
+window.addEventListener('hashchange', function(){window.location.reload()});
+function makeMenu(sources){
+    var menu = document.getElementById('menu');
+    var topics = Object.keys(sources);
+    //console.log(sources);
+    for(var i=0; i<topics.length; i++){
+      var topic = document.createElement('a');
+      topic.innerText = topics[i];
+      topic.href = '/#'+encodeURIComponent(topics[i]);
+      //topic.onclick = function(){window.location = self.href;};
+      menu.appendChild(topic);
+    }
+}
+makeMenu(sources);
 
 // Sets date at top of page
 function setDate(){
