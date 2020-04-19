@@ -19,19 +19,18 @@
     <link rel='stylesheet' type='text/css' href='stylesheet.css'></link>
     <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
     <script>
-      var sources = {{ page.sources }}
+    var sources = {{ site.sources | jsonify }};
     </script>
   </head>
   <body>
     <div id='title'>
-      <h1>{% if page.title == 'Headlines' %}{{ site.title }}{% else %}{{ site.title }}: {{page.title}}{% endif %}</h1>
     </div>
     <div id='hmbgr' onClick="toggle('#menu')">☰☰</div>
     <div id='date'>
     </div>
     <div id='menu'>
       {% for page in site.html_pages %}
-      <a href='{{page.name}}'>{{page.title}}</a>
+      <!--<a href='{{page.name}}'>{{page.title}}</a>-->
       {% endfor %}
     </div>
     <div id='content'>
