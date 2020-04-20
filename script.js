@@ -180,6 +180,8 @@ function toggle(id){
   }
 };
 
+
+/*
 window.addEventListener('resize', function(){
   // Display menu appropriately when screen width changes no matter current
   // menu display state.
@@ -212,76 +214,27 @@ window.addEventListener('resize', function(){
   }
   console.log('resize');
 });
+*/
 
 
-// Get a reference to an element.
-content = document.querySelector('#content');
-// Create an instance of Hammer with the reference.
-hammer = new Hammer(content);
-cols = 0;
-columns = document.querySelectorAll('.column');
-debounce = true;  // as in allow pan to occur
-// Left-most column to display
-ref = 0;
 
-width = window.innerWidth;
-// Subscribe to a quick start event: press, tap, or doubletap.
-// For a full list of quick start events, read the documentation.
-hammer.on('panmove panstart', function(e) {
+//////////////////////////////////////////////
+var columns = document.querySelectorAll('.column');
+var ref = 0;
+//let pageWidth = window.innerWidth;
 
-  // Set up breakpoints. cols is number of columns to display in addition to reference or 0th column
-  if(width > 1000){
-    ref = 0;
-    cols = columns.length;  // Desktop
-  }
-  if(750 < width && width <= 1000){
-    cols = 1;  // Tablet
-  }
-  if(width <= 750){
-    cols = 0;  // Phone
-  }
-  if(Math.abs(e.deltaX/e.deltaY) > 10 && e.distance/width > .25 && debounce){
-    debounce = false;  // debounce // as in do not allow pan to occur
-    // pan left
-    if(e.deltaX > 0){
-      if(ref > 0){
-        ref = ref - 1;
-      }
-    }
-    // pan right
-    if(e.deltaX < 0){
-      if((ref+cols)<columns.length-1){
-        ref = ref + 1;
-      }
-    }
-    for(var k=0; k<columns.length; k++){
-      if(ref<=k && k<=(ref+cols)){
-        columns[k].style.display = 'block';
-      }
-      else{
-        columns[k].style.display = 'none';
-      }
-    }
-    content.scrollTo(scrollX,0); // reset scroll position to top of page on pan
-
-    setTimeout(function(){
-      debounce = true;  // turn off debounce // allow pan to occur
-    },500);
-
-  }
-  console.log(e.deltaX/e.deltaY, e.distance/width, ref, cols, debounce);
-});
+/////////////////////////////////////////////////////
 
 // Set up breakpoints. cols is number of columns to display in addition to reference or 0th column
-width = window.innerWidth;
-if(width > 1000){
+/*
+if(pageWidth > 1000){
   ref=0;
   cols = columns.length;  // Desktop
 }
-if(750 < width && width <= 1000){
+if(750 < pageWidth && pageWidth <= 1000){
   cols = 1;  // Tablet
 }
-if(width <= 750){
+if(pageWidth <= 750){
   cols = 0;  // Phone
 }
 for(var k=0; k<columns.length; k++){
@@ -293,3 +246,4 @@ for(var k=0; k<columns.length; k++){
   }
 }
 console.log('load');
+*/
