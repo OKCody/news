@@ -240,7 +240,7 @@ hammer.on('panmove panstart', function(e) {
   if(width <= 750){
     cols = 0;  // Phone
   }
-  if(Math.abs(e.deltaX/e.deltaY) > 10 && e.distance/width > .2 && debounce){
+  if(Math.abs(e.deltaX/e.deltaY) > 10 && e.distance/width > .1 && debounce){
     debounce = false;  // debounce // as in do not allow pan to occur
     // pan left
     if(e.deltaX > 0){
