@@ -17,27 +17,71 @@
     <title>{% if page.title == 'Headlines' %}{{ site.title }}{% else %}{{ site.title }}: {{page.title}}{% endif %}</title>
     <script src='rss-parser.js'></script>
     <link rel='stylesheet' type='text/css' href='stylesheet.css'></link>
+    <link rel='stylesheet' type='text/css' href='swipe.css'></link>
     <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
     <script>
     var sources = {{ site.sources | jsonify }};
     </script>
   </head>
   <body>
-    <div id='title'>
-    </div>
+    <div id='header'>
+    <div id='title'></div>
     <div id='hmbgr' onClick="toggle('#menu')">☰☰</div>
-    <div id='date'>
+    <div id='date'></div>
     </div>
     <div id='menu'>
       {% for page in site.html_pages %}
       <!--<a href='{{page.name}}'>{{page.title}}</a>-->
       {% endfor %}
     </div>
-    <div id='content'>
+    <div id='content' class='swipe' style='width:100%'>
+      <div id='temp'>
+      </div>
     </div>
-    <div id='footer'>
-    </div>
+    <!--<div id='footer'>
+    </div>-->
   </body>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.js'></script>
+  <!--<script src='https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.js'></script>-->
   <script src='script.js'></script>
+  <script src='swipe.js'></script>
+  <script>
+    //new Swipe(document.getElementById('content'), {items:4});
+
+    function size(){
+      console.log('S I Z E');
+      //delete swipe;
+      var col = document.querySelectorAll('#temp > div');
+      var windowWidth = window.innerWidth;
+
+      if (1000 <= windowWidth){
+        console.log('F O U R');
+        var swipe = new Swipe(document.getElementById('content'), {items:4});
+        var w = windowWidth / 4.0;
+      }
+      if (750 <= windowWidth && windowWidth < 1000){
+        console.log('T W O');
+        var swipe = new Swipe(document.getElementById('content'), {items:2});
+        var w = windowWidth / 2.0;
+      }
+      if (750 > windowWidth){
+        console.log('O N E');
+        var swipe = new Swipe(document.getElementById('content'), {items:1});
+        var w = windowWidth;
+      }
+      for(var i=0; i<col.length; i++){
+        col[i].style.width = w.toString() + 'px';
+      }
+      var contWidth = (col.length * w) + col.length;
+      document.getElementById('temp').style.width = contWidth.toString() + 'px';
+    }
+    size();  // when uncommented, it causes the columns to be screwed up on first load.
+    /*
+    var colWidth = parseFloat(window.getComputedStyle(document.getElementsByClassName('col')[0]).width.slice(0,-2));
+    var colQuant = document.getElementsByClassName('col').length;
+    var quotient = (colWidth * colQuant) - 13;
+    */
+    //document.getElementById('temp').style.width = quotient.toString()+'px';
+    window.addEventListener("resize", size, false);
+    // DONT FORGET TO COMMIT TO THE SWIPE BRANCH
+  </script>
 </html>

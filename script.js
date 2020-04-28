@@ -123,12 +123,14 @@ document.getElementById('title').innerHTML = '<h1>News: '+ page +'</h1>';
 var pageSources = sources[page];
 var k = Object.keys(pageSources);
 //var sources = sources[k[]]
-var content = document.getElementById('content');
+var content = document.getElementById('temp');
 for(j=0; j<k.length; j++){
   // make column
   console.log('makeCol');
   var column = document.createElement('div');
-  column.classList.add('column');
+  column.style.display = 'table-cell';
+  column.style.verticalAlign = 'top';
+  column.classList.add('col'); //column
   var div = document.createElement('div');
   var org = document.createTextNode(k[j]);
   div.appendChild(org);
@@ -180,7 +182,13 @@ function toggle(id){
   }
 };
 
+/*
+
 window.addEventListener('resize', function(){
+
+  cols = 0;
+  columns = document.querySelectorAll('.column');
+
   // Display menu appropriately when screen width changes no matter current
   // menu display state.
   var menu = document.getElementById('menu');
@@ -212,6 +220,8 @@ window.addEventListener('resize', function(){
   }
   console.log('resize');
 });
+
+
 
 
 // Get a reference to an element.
@@ -293,3 +303,5 @@ for(var k=0; k<columns.length; k++){
   }
 }
 console.log('load');
+
+*/
